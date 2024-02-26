@@ -10,7 +10,7 @@ const Navbar = () => {
 
                   {/* pc */}
 
-                  <div className="navbar px-8 bg-slate-100 py-2 fixed z-10 hidden lg:flex md:flex">
+                  <div className="navbar px-8 bg-slate-100 py-2 fixed  z-10 hidden lg:flex md:flex">
                         <div className="navbar-start">
                               <a className="btn btn-ghost text-xl font-MochiyPopOne"> Lead Forge</a>
                         </div>

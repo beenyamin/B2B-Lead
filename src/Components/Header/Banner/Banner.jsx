@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Banner = () => {
     return (
         <div>
-            <div className=" lg:py-28 py-14 md:py-14 bg-[url('https://demoapus1.com/jobtex-new/wp-content/uploads/2023/06/slider81.jpg')]">
+            <div className=" lg:py-28  bg-black  py-14 md:py-14 bg-[url('https://demoapus1.com/jobtex-new/wp-content/uploads/2023/06/slider81.jpg')]">
                 <div className=" flex-col items-end lg:flex-row-reverse ">
                     <div className="text-center pt-10">
                         <h1 className="lg:text-4xl text-2xl font-bold text-white ">Find Your Highly Targeted Verified <br /> Lead For Only 30¢</h1>
@@ -44,6 +44,9 @@ const Banner = () => {
            
 
             </div>
+
+      
+
 
            
 
