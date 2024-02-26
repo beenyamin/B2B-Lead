@@ -30,7 +30,7 @@ const Target = () => {
                         <div className="card w-96">
                               <div className="card-body ">
                                     <div className="">
-                                          < FaSearchengin size={90} color="" className="border-[#0f0e0e] hover:border-[#F33A6A] hover:text-[#F33A6A] items-center justify-center mx-auto mb-4  border-4 rounded-full p-4" />
+                                          < FaSearchengin size={90}  className="border-[#0f0e0e] hover:border-[#F33A6A] hover:text-[#F33A6A] items-center justify-center mx-auto mb-4  border-4 rounded-full p-4" />
                                           <h2 className="text-center">
                                                 <span className="text-lg font-semibold">Step 2 :</span> Within next 12 hours, we start researching, identifying, and validating your ideal and qualified contacts
                                           </h2>
@@ -51,8 +51,8 @@ const Target = () => {
 
                   </div>
 
-                  <div className="text-center">
-                  <Link to=''> <button className="py-3 px-7 font-medium text-2xl border-0 rounded-xl hover:bg-lime-500 bg-rose-400 text-white">GET STARTED</button></Link>
+                  <div className="text-center pt-8">
+                  <Link to=''> <button className="py-3 shadow px-7 font-medium text-2xl border-0 rounded-xl hover:bg-lime-500 bg-rose-400 text-white">GET STARTED</button></Link>
                   </div>
 
             </div>
