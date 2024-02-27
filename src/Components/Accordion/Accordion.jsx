@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { TiMinus, TiPlus } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 
 const Accordion = () => {  
       const [Accordion , setAccordion] = useState (false)
       return (
             <div>
-                   <div className="lg:flex flex-row lg:gap-3 space-y-4 lg:space-y-0 justify-center mx-auto mt-2 lg:px-20">
+                   <div className="lg:flex flex-row lg:gap-3 space-y-4 lg:space-y-0 justify-center mx-auto mt-2 lg:px-16">
                         <div className="">
                               <button onClick={() => setAccordion(!Accordion)}
-                                    className="flex justify-between py-3 px-5  text-xl bg-rose-400 font-semibold text-white " >
-                                    <span>Hire Dedicated Research Team</span>
+                                    className="flex justify-between lg:py-3  lg:px-5  lg:text-xl bg-[#4c2393] font-semibold text-white " >
+                                    <span className="pl-2 lg:pl-0">Hire Dedicated Research Team</span>
                                     <div className="ml-40 mt-1 pr-4 ">
                                           {Accordion ? <TiMinus /> : <TiPlus />}
                                     </div>
@@ -37,10 +38,10 @@ const Accordion = () => {
                         </div>
 
                         <div>
-                              <button className="bg-[#4c2393] text-xl py-3 px-10 font-semibold text-white ">30¢ Per Contact</button>
+                              <button className="bg-[#ed1588] text-xl py-3 px-10 font-semibold text-white ">Contact us for Quote</button>
                         </div>
                         <div>
-                              <button className="bg-[#2d9322] text-xl py-3 px-10 font-semibold text-white uppercase ">Order now</button>
+                             <Link to="/contact"> <button className="bg-[#2d9322] text-xl py-3 px-10 font-semibold text-white uppercase ">Contact us</button></Link>
                         </div>
 
                   </div>

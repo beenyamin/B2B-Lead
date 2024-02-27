@@ -17,13 +17,14 @@ const Navbar = () => {
                         <div className="navbar-center ">
                               <ul className="px-1 space-x-10">
                                     <NavLink className="font-medium text-md hover:text-rose-400">Home</NavLink>
-                                    <NavLink className="font-medium text-md hover:text-rose-400">Service</NavLink>
-                                    <NavLink className="font-medium text-md hover:text-rose-400">Contact</NavLink>
+                                    <NavLink to='/service' className="font-medium text-md hover:text-rose-400">Service</NavLink>
+                                    <NavLink  to='/contact' className="font-medium text-md hover:text-rose-400">Contact</NavLink>
+                                    <NavLink  to='/blogs' className="font-medium text-md hover:text-rose-400">Blogs</NavLink>
                               </ul>
                         </div>
                         <div className="navbar-end ">
 
-                              <Link className="bg-rose-400 py-2 rounded-md px-5 hover:bg-lime-500 text-white text-md font-medium">Lets Talk</Link>
+                              <Link className="bg-[#4c2393] py-2 rounded-md px-5 hover:bg-lime-500 text-white text-md font-medium">Lets Talk</Link>
                         </div>
                   </div>
 

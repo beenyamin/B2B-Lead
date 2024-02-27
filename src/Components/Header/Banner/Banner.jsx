@@ -10,7 +10,7 @@ const Banner = () => {
                         <p className="py-3 lg:text-xl text-white ">Using your search criteria,<br /> we find and build highly targeted lists in <br />  48 hrs. ill your pipeline with high-quality <br /> human-verified leads at an affordable way.!</p>
 
                         <h1 className='text-white text-sm mb-1' >300+ Five Star Client Reviews</h1>
-                        <Link to=''> <button className="py-3 px-7 shadow font-medium text-md border-0 rounded-xl hover:bg-lime-500 bg-rose-400 text-white">GET STARTED</button></Link>
+                        <Link to=''> <button className="py-3 px-7 shadow font-medium text-md border-0 rounded-xl hover:bg-lime-500 bg-[#4c2393] text-white">GET STARTED</button></Link>
 
                     </div>
                 </div>

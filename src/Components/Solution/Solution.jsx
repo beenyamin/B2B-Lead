@@ -2,24 +2,25 @@ import { useState } from "react";
 import { TiPlus, TiMinus } from "react-icons/ti";
 import Accordion from "../Accordion/Accordion";
 import Icons from "../Icons";
+import { Link } from "react-router-dom";
 
 const Solution = () => {
 
       const [accordionOpen, setAccordionOpen] = useState(false);
 
       return (
-            <div className="my-20">
+            <div className="my-28">
                   <div className="text-center ">
-                        <h2 className="lg:text-4xl text-2xl font-bold mb-3 pt-8 ">Solutions and Pricing </h2>
+                        <h2 className="lg:text-4xl text-2xl font-bold mb-3  ">Solutions and Pricing </h2>
                         <p className="text-[#7A7A7A]">Maximize your prospecting and sales conversions using Accurate <br /> Verified &
                               Relevant data based on your target persona</p>
                   </div>
 
 
 
-                  <div className="lg:flex flex-row lg:gap-3 space-y-4 lg:space-y-0 justify-center mx-auto mt-6 lg:px-20">
+                  <div className="lg:flex flex-row lg:gap-3 space-y-4 lg:space-y-0 justify-center mx-auto mt-6 lg:px-16">
                         <div className="">
-                              <button onClick={() => setAccordionOpen(!accordionOpen)} className="flex justify-between py-3 px-5  text-xl bg-rose-400 font-semibold text-white " >
+                              <button onClick={() => setAccordionOpen(!accordionOpen)} className="flex justify-between py-3 px-5  text-base lg:text-xl bg-[#4c2393] font-semibold text-white " >
                                     <span>Hand Curated Custom Contact List Building</span>
                                     <div className="ml-8 mt-1 pr-4 ">
                                           {accordionOpen ? <TiMinus /> : <TiPlus />}
@@ -47,10 +48,10 @@ const Solution = () => {
                         </div>
 
                         <div>
-                              <button className="bg-[#4c2393] text-xl py-3 px-10 font-semibold text-white ">30¢ Per Contact</button>
+                              <button className="bg-[#ed1588] text-xl py-3 px-16 font-semibold text-white">30¢ Per Contact</button>
                         </div>
                         <div>
-                              <button className="bg-[#2d9322] text-xl py-3 px-10 font-semibold text-white uppercase ">Order now</button>
+                             <Link to="/contact"> <button className="bg-[#2d9322] text-xl py-3 px-10 font-semibold text-white uppercase ">Order now</button></Link>
                         </div>
 
                   </div>

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Info = () => {
       return (
             <div>
-                  <div className='bg-rose-400 hidden md:block lg:block sticky  py-1'>
+                  <div className='bg-[#4c2393] hidden md:block lg:block sticky  py-1'>
                         <div className="flex text-white justify-between ">
                               <div className="flex">
                                     <div className='flex space-x-2'>

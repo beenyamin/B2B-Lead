@@ -12,10 +12,10 @@ const Target = () => {
             <div className="bg-slate-200 py-10">
                   <div className="text-center ">
                         <h2 className="lg:text-4xl text-2xl font-bold mb-3 pt-8 ">Let us find all the targeted data for You </h2>
-                        <p className="text-[#747474]">Our super expert research team targets and finds your most qualified <br /> prospects and validate  with prior technology by hands.</p>
+                        <p className="text-[#747474] text-lg">Our super expert research team targets and finds your most qualified <br /> prospects and validate  with prior technology by hands.</p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:px-14">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-10 lg:px-14">
 
                         <div className="card w-96">
                               <div className="card-body ">
@@ -52,7 +52,7 @@ const Target = () => {
                   </div>
 
                   <div className="text-center pt-8">
-                  <Link to=''> <button className="py-3 shadow px-7 font-medium text-2xl border-0 rounded-xl hover:bg-lime-500 bg-rose-400 text-white">GET STARTED</button></Link>
+                  <Link to=''> <button className="py-3 shadow px-7 font-medium text-2xl border-0 rounded-xl hover:bg-lime-500 bg-[#4c2393] text-white">GET STARTED</button></Link>
                   </div>
 
             </div>
