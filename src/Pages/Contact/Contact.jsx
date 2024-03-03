@@ -19,12 +19,12 @@ const Contact = () => {
                               <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:ml-5">
 
                                     <div className="space-y-3">
-                                          <label className="input input-warning flex items-center gap-2 border-[#4c2393]">
+                                          <label className="input input-ghost flex items-center gap-2 border-[#4c2393]">
                                                 <IoPerson />
                                                 <input type="text" className="" placeholder="Your Name" />
                                           </label>
 
-                                          <label className="input input-warning flex items-center gap-2 border-[#4c2393]">
+                                          <label className="input input-ghost flex items-center gap-2 border-[#4c2393]">
                                                 <  IoMdMailUnread />
                                                 <input type="text" className="grow" placeholder="Your Email" />
                                           </label>
@@ -32,12 +32,12 @@ const Contact = () => {
                                     </div>
 
                                     <div className="space-y-3">
-                                          <label className="input input-warning flex items-center gap-2 border-[#4c2393]">
+                                          <label className="input input-ghost flex items-center gap-2 border-[#4c2393]">
                                                 < RiHomeOfficeFill />
                                                 <input type="text" className="grow" placeholder="Your Company Name" />
                                           </label>
 
-                                          <label className="input input-warning flex items-center gap-2 border-[#4c2393] focus:border-[#4c2393]">
+                                          <label className="input input-ghost flex items-center gap-2 border-[#4c2393] focus:border-[#4c2393]">
                                                 < FaSquarePhone />
                                                 <input type="text" className="grow focus:outline-none" placeholder="Your Phone Number" />
                                           </label>
