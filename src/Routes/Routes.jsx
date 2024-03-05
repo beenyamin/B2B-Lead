@@ -5,11 +5,13 @@ import Contact from "../Pages/Contact/Contact";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoutes from "./PrivateRoutes";
+import ErrorPage from "../Pages/Error/ErrorPage";
 
 export const router = createBrowserRouter([
       {
             path: "/",
             element: <Main></Main>,
+            errorElement:<ErrorPage/>,
             children: [
                   { path: "/",element: <Home />},
                   { path: "/contact",

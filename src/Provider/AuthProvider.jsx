@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
 import { auth } from "../Config/firebase.config";
+import { RemoveToken } from "../Api/utils";
 
 const googleProvider = new GoogleAuthProvider();
 export const AuthContext = createContext();
@@ -9,85 +9,61 @@ export const AuthContext = createContext();
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
 
-      const [user, setUser] = useState(null);
-      const [isLoading, setIsLoading] = useState(true);
-
+      const [user, setUser] = useState(null)
+      const [loading, setLoading] = useState(true)
+  
       const createUser = (email, password) => {
-            setIsLoading(true);
-            return createUserWithEmailAndPassword(auth, email, password);
-      };
-
-      const login = (email, password) => {
-            setIsLoading(true);
-            return signInWithEmailAndPassword(auth, email, password);
-      };
-
-      const googleLogin = () => {
-            return signInWithPopup(auth, googleProvider);
-      };
-
+          setLoading(true)
+          return createUserWithEmailAndPassword(auth, email, password)
+      }
+  
+      const signIn = (email, password) => {
+          setLoading(true)
+          return signInWithEmailAndPassword(auth, email, password)
+      }
+  
+      const signInWithGoogle = () => {
+          setLoading(true)
+          return signInWithPopup(auth, googleProvider)
+      }
+  
       const logOut = () => {
-            setIsLoading(true);
+            setLoading(true);
             return signOut(auth);
       };
-
-
-      const handleUpdateProfile = (name, photo) => {
-            return updateProfile(auth.currentUser, {
-                  displayName: name, photoURL: photo
-            })
-
+  
+      const updateUserProfile = (name, photo) => {
+          return updateProfile(auth.currentUser, {
+              displayName: name,
+              photoURL: photo,
+          })
       }
-
-
+  
+      // onAuthStateChange
       useEffect(() => {
-            const unSubsCribe = onAuthStateChanged(auth, (currentUser) => {
-                  const userEmail = currentUser?.email || user?.email;
-                  const LoggedUser = { email: userEmail };
-
-                  setUser(currentUser);
-                  setIsLoading(false);
-                  if (currentUser) {
-
-                        axios.post('http://localhost:5000/jwt', LoggedUser,
-                              { withCredentials: true })
-                              .then(res => {
-                                    console.log('token response', res.data);
-
-                              })
-
-                  }
-                  else {
-                        axios.post('http://localhost:5000/logout', LoggedUser, {
-                              withCredentials: true
-                        })
-                              .then(res => {
-                                    console.log(res.data);
-
-                              })
-
-                  }
-
-
-            });
-
-            return () => {
-                  return unSubsCribe();
-            };
-
-      }, []);
-
+          const unsubscribe = onAuthStateChanged(auth, currentUser => {
+              setUser(currentUser)
+              console.log('CurrentUser ==>', currentUser)
+              setLoading(false)
+          })
+          return () => {
+              return unsubscribe()
+          }
+      }, [])
+  
+  
+  
       const authInfo = {
-            createUser,
-            login,
-            user,
-            isLoading,
-            logOut,
-            googleLogin,
-            handleUpdateProfile
-
-
-      };
+          user,
+          createUser,
+          signIn,
+          signInWithGoogle,
+          logOut,
+          updateUserProfile,
+          loading,
+          setLoading
+  
+      }
 
       return (
 

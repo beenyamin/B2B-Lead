@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet-async";
 import HappyClient from "../../Components/HappyClient/HappyClient";
 import Banner from "../../Components/Header/Banner/Banner";
 import HireUs from "../../Components/HireUs/HireUs";
@@ -9,15 +10,18 @@ import Target from "../../Components/Target/Target";
 
 const Home = () => {
       return (
-            <div>            
-               <Banner/>
-               <HappyClient/>
-               <Target/>
-               <Solution/>
-               <HireUs/>
-               <Reviews/>
-             
-               
+            <div>
+                  <Helmet>
+                        <title> Lead Forge | Home </title>
+                  </Helmet>
+                  <Banner />
+                  <HappyClient />
+                  <Target />
+                  <Solution />
+                  <HireUs />
+                  <Reviews />
+
+
             </div>
       );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AiFillGoogleCircle, AiFillLinkedin } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
@@ -8,83 +8,74 @@ import signUpImage from "../../../public/images/Sign up-bro.png";
 import { IoMdMailUnread } from "react-icons/io";
 import { RiEyeFill, RiEyeOffFill, RiLockPasswordFill } from "react-icons/ri";
 import { IoPerson } from "react-icons/io5";
+import { Helmet } from "react-helmet-async";
+import { getToken, saveUser } from "../../Api/utils";
 
 const SignUp = () => {
-      const { createUser, googleLogin, handleUpdateProfile } = useAuth();
-      const [registerError, setRegisterError] = useState('');
-      const [signUpSuccess, setSignUpSuccess] = useState('');
-      const [password, setPassword] = useState('');
+      const { createUser, signInWithGoogle,} = useAuth();
       const [showPassword, setShowPassword] = useState(false);
-      const location = useLocation();
       const navigate = useNavigate();
-
-
 
       const handleTogglePassword = () => {
             setShowPassword(!showPassword);
       };
 
-      const handleSignUp = e => {
-            e.preventDefault();
-            const name = e.target.name.value;
-            const email = e.target.email.value;
-            const password = e.target.password.value;
-            console.log(name, email, password);
+  
+      const handleSignUp = async (event) => {
+          event.preventDefault();
+          const form = event.target;
+          const name = form.name.value;
+          const email = form.email.value;
+          const password = form.password.value;
+          console.log(name, email, password);
+      
+          // Password length check
+          if (password.length < 6) {
+              toast.error('Password should be at least 6 characters!');
+              return;
+          } else if (!/(?=.*[A-Z])(?=.*[_.!@$*=-?#])/.test(password)) {
+              toast.error("Password Must Be One Uppercase & One Special character");
+              return;
+          }   
+          try {
 
-            setRegisterError('');
-            setSignUpSuccess('');
-
-
-            if (password.length < 6) {
-                  toast.error('Password should be at least 6 characters!')
-                  return;
-
-            }
-            else if (!/(?=.*[A-Z])(?=.*[_.!@$*=-?#])/.test(password)) {
-
-                  toast.error(" Your password should have at Least one UpperCase & special character ")
-                  return
-            }
-
-
-
-            createUser(email, password)
-                  .then(res => {
-                        console.log(res)
-                        handleUpdateProfile(name)
-
-                              .then(res => {
-                                    console.log(res)
-                                    navigate(location?.state ? location.state : '/signIn');
-                                    toast.success(' SignUp Successful Please SignIn ')
-
-
-                              })
-                  })
-
-                  .catch(error => {
-                        toast.error(error.message);
-
-                  })
-
+              const UserCreate = await createUser(email, password);
+              console.log(UserCreate);
+              const userSaveDb = await saveUser(UserCreate?.user);
+              console.log(userSaveDb);
+              //token 
+              await getToken(UserCreate?.user?.email);
+              navigate('/');
+              toast.success('SignUp Successful');
+          } catch (error) {
+              toast.error(error?.message);
+          }
       }
-
-      const handleGoogleSignUp = () => {
-            googleLogin()
-                  .then(result => {
-                        console.log(result.user)
-                        toast.success(' Google Registration Successful');
-                        navigate(location?.state ? location.state : '/signIn');
-                  })
-                  .catch(error => {
-                        console.error(error)
-                        toast.error('Google Registration failed. Please try again.');
-                  })
+      
+  
+      const handleGoogleSignUp = async () => {
+  
+          try {
+              const GoogleRegister = await signInWithGoogle()
+              const userSaveDb = await saveUser(GoogleRegister?.user)
+              console.log(userSaveDb);
+  
+              //token 
+              await getToken(GoogleRegister?.user?.email)
+              navigate('/')
+              toast.success(' SuccessFully SignUp With Google')
+          
+          } catch (error) {
+              toast.error(error?.message);
+          }
       }
+  
 
       return (
             <div className="mb-20 px-0 lg:px-24 pt-20 " >
-
+                  <Helmet>
+                        <title> Lead Forge | Sign Up </title>
+                  </Helmet>
                   <div className=" mt-10 flex justify-between">
                         <div></div>
                         <div className="mr-20">
@@ -108,7 +99,7 @@ const SignUp = () => {
                               </div>
 
                               <div>
-                              <label className="label">
+                                    <label className="label">
                                           <h2>Name</h2>
                                     </label>
                                     <label className="input input-ghost flex items-center gap-2 border-[#4c2393]">
@@ -116,10 +107,11 @@ const SignUp = () => {
                                           <input type="text"
                                                 className="grow focus:outline-none w-full"
                                                 required
-                                                placeholder="Your Name"
                                                 name="name"
-                                               
-                                                 />
+                                                placeholder="Your Name"
+                                            
+
+                                          />
                                     </label>
                               </div>
 
@@ -133,7 +125,7 @@ const SignUp = () => {
                                                 type="email"
                                                 className="grow focus:outline-none w-full"
                                                 required
-                                               name="email"
+                                                name="email"
                                                 placeholder="Your Email" />
                                     </label>
                               </div>
@@ -150,10 +142,6 @@ const SignUp = () => {
                                                 placeholder="Create password"
                                                 required
                                                 name="password"
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                checked={password}
-                                              
 
                                           />
                                           {showPassword ? (
@@ -186,16 +174,7 @@ const SignUp = () => {
                                     </div>
                               </div>
 
-                              {
-                                    registerError && <p className="bg-indigo-600 my-5 
-            font-semibold">{registerError}</p>
-                              }
-
-                              {
-
-                                    signUpSuccess && <p className="text-indigo-600 my-5
-             font-semibold">{signUpSuccess}</p>
-                              }
+                        
 
                         </form>
                   </div>

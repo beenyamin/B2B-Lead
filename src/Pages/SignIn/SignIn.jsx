@@ -8,49 +8,64 @@ import useAuth from "../../Hooks/useAuth";
 import signInImage from "../../../public/images/Sign in-pana.png";
 import { RiEyeFill, RiEyeOffFill, RiLockPasswordFill } from "react-icons/ri";
 import { IoMdMailUnread } from "react-icons/io";
+import { Helmet } from "react-helmet-async";
+import { getToken, saveUser } from "../../Api/utils";
 
 const SignIn = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const { login, googleLogin } = useAuth();
+    const { signIn,signInWithGoogle } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+
     // console.log(location);
-   
     const [showPassword, setShowPassword] = useState(false);
     const handleTogglePassword = () => {
         setShowPassword(!showPassword);
     };
 
-
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        const toastId = toast.loading('Logging in ...');
-
-        try {
-            await login(email, password);
-            toast.success('Logged in', { id: toastId });
-            navigate(location?.state ? location?.state : '/');
-
-        } catch (error) {
-            toast.error(error.message, { id: toastId });
-        }
-
+    const from = location?.state?.from?.pathname || '/'
+  
+   
+    const handleSignIn = async event => {
+      event.preventDefault()
+      const form = event.target
+      const email = form.email.value
+      const password = form.password.value
+  
+      try {
+     
+        const result = await signIn(email, password)
+        await getToken(result?.user?.email)
+        navigate(from, { replace: true })
+        toast.success('Login Successful')
+      } catch (err) {
+        console.log(err)
+        toast.error(err?.message)
+      }
     }
-
-    const handleGoogleLogin = async () => {
-        const toastId = toast.loading('Logging in ...');
-
+  
+  
+    const handleGoogleSignIn = async () => {
         try {
-            await googleLogin(email, password);
-            toast.success('Logged in', { id: toastId });
-            navigate(location?.state ? location?.state : '/');
+            const GoogleRegistration = await signInWithGoogle()
+            const userSaveDb = await saveUser(GoogleRegistration?.user)
+            console.log(userSaveDb);
+
+            await getToken(GoogleRegistration?.user?.email)
+            navigate('/')
+            toast.success(' SuccessFully Log in With Google')
+        
         } catch (error) {
-            toast.error(error.message, { id: toastId });
+            toast.error(error?.message);
         }
-    };
+    }
+  
     return (
         <div className="mb-20 px-0 lg:px-24 pt-20">
+             <Helmet>
+                <title> Lead Forge | Sign in </title>
+            </Helmet>
+
+
             <div className=" mt-10 flex justify-evenly lg:justify-end">
                 <div className="">
                     <h2 className="text-gray-400"> New Here? <span className="text- md text-[#4c2393] font-semibold "> <Link to={'/signUp'}>SignUp</Link> </span></h2>
@@ -64,7 +79,7 @@ const SignIn = () => {
 
                 {/* Form Start */}
 
-                <form onSubmit={handleLogin} className="w-60  ml-10 lg:w-72">
+                <form onSubmit={handleSignIn} className="w-60  ml-10 lg:w-72">
                     <div>
                         <h2 className="text-2xl font-semibold">Welcome Back ..!</h2>
                         <p className="text-gray-400 ">SignIn to continue</p>
@@ -82,7 +97,8 @@ const SignIn = () => {
                                 className="grow focus:outline-none w-full"
                                 placeholder="Your email"
                                 required
-                                onBlur={(e) => setEmail(e.target.value)} />
+                                name="email"
+                                 />
                         </label>
                     </div>
 
@@ -97,9 +113,7 @@ const SignIn = () => {
                                 className="grow focus:outline-none w-full"
                                 placeholder="Password"
                                 required
-                                value={password}
-                                checked={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                name="password"
                             />
                             {showPassword ? (
                                 <RiEyeOffFill onClick={handleTogglePassword} />
@@ -125,7 +139,7 @@ const SignIn = () => {
                         </div>
 
                         <div className=" ml-4 lg:ml-10">
-                            <Link> <button onClick={handleGoogleLogin} className=' btn btn-outline text-[#4c2393] hover:bg-[#4c2393]'>
+                            <Link> <button onClick={ () => handleGoogleSignIn ()} className=' btn btn-outline text-[#4c2393] hover:bg-[#4c2393]'>
                                 <AiFillGoogleCircle className='w-8 h-6'></AiFillGoogleCircle></button></Link>
                             <Link> <button className='btn btn-outline text-[#4c2393] hover:bg-[#4c2393]'>
                                 <BsFacebook className='w-8 h-6'></BsFacebook></button></Link>

@@ -3,11 +3,15 @@ import { IoMdMailUnread } from "react-icons/io";
 import { RiHomeOfficeFill } from "react-icons/ri";
 import { FaSquarePhone } from "react-icons/fa6";
 import { PiCheckFatBold } from "react-icons/pi";
+import { Helmet } from "react-helmet-async";
 
 
 const Contact = () => {
       return (
             <div className="pt-12 px-8 mb-20 ">
+                  <Helmet>
+                        <title> Lead Forge | Contact </title>
+                  </Helmet>
                   <div className="grid grid-cols-1 lg:grid-cols-2 w-full mt-10">
                         <div className="card ">
                               <div className="card-body">
@@ -79,16 +83,16 @@ const Contact = () => {
                               <div className="flex text-[#636363] ml-2 ">
                                     <PiCheckFatBold size={25} className="mr-2" />
                                     <p className="text-xl font-semibold">
-                                    No commitment! Order as your need</p>
+                                          No commitment! Order as your need</p>
                               </div>
-                              <hr /> 
+                              <hr />
 
                               <div className="flex text-[#636363] ml-2 ">
                                     <PiCheckFatBold size={25} className="mr-2" />
                                     <p className="text-xl font-semibold">48hrs delivery</p>
                               </div>
-                              <hr /> 
-                              
+                              <hr />
+
                               <div className="flex text-[#636363]  ml-2 ">
                                     <PiCheckFatBold size={25} className="mr-2" />
                                     <p className="text-xl font-semibold">5x cheaper than Zoom info</p>
@@ -102,8 +106,8 @@ const Contact = () => {
                                     <PiCheckFatBold size={25} className="mr-2" />
                                     <p className="text-xl font-semibold">Researching hour capabilities</p>
                               </div>
-                              <hr /> 
-                            
+                              <hr />
+
 
 
 
