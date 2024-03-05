@@ -4,10 +4,9 @@ import axios from "axios";
 import { auth } from "../Config/firebase.config";
 
 const googleProvider = new GoogleAuthProvider();
-
 export const AuthContext = createContext();
 
-
+// eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
 
       const [user, setUser] = useState(null);

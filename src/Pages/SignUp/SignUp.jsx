@@ -56,7 +56,7 @@ const SignUp = () => {
                               .then(res => {
                                     console.log(res)
                                     navigate(location?.state ? location.state : '/signIn');
-                                    toast.success(' SignUp SuccessFully => Please SignIn !')
+                                    toast.success(' SignUp Successful Please SignIn ')
 
 
                               })
@@ -104,7 +104,7 @@ const SignUp = () => {
                         <form onSubmit={handleSignUp} className="w-60  ml-10 lg:w-72">
 
                               <div>
-                                    <h2 className="text-2xl font-bold">Register Here..!</h2>
+                                    <h2 className="text-2xl font-bold">SignUp Here..!</h2>
                               </div>
 
                               <div>
@@ -152,6 +152,9 @@ const SignUp = () => {
                                                 name="password"
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
+                                                checked={password}
+                                              
+
                                           />
                                           {showPassword ? (
                                                 <RiEyeOffFill onClick={handleTogglePassword} />
@@ -163,14 +166,14 @@ const SignUp = () => {
                               </div>
 
                               <div className="flex space-x-3 justify-between mt-4">
-                                    <button type="submit" className="px-5 py-2 w-full bg-[#4c2393]  rounded-md text-white" >Register</button>
+                                    <button type="submit" className="px-5 py-2 w-full bg-[#4c2393]  rounded-md text-white" >SignUp</button>
 
                               </div>
 
 
                               <div className='gird grid-cols-1 mt-3 lg:grid-cols-1 '>
                                     <div className="text-center">
-                                          <h2 className="mb-3 font-medium">Or Register With..</h2>
+                                          <h2 className="mb-3 font-medium">Or SignUp With..</h2>
                                     </div>
 
                                     <div className=" ml-4 lg:ml-10">

@@ -5,7 +5,7 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 import toast from "react-hot-toast";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import signInImage from "../../../public/images/Computer login-bro.png";
+import signInImage from "../../../public/images/Sign in-pana.png";
 import { RiEyeFill, RiEyeOffFill, RiLockPasswordFill } from "react-icons/ri";
 import { IoMdMailUnread } from "react-icons/io";
 
@@ -15,7 +15,7 @@ const SignIn = () => {
     const { login, googleLogin } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
    
     const [showPassword, setShowPassword] = useState(false);
     const handleTogglePassword = () => {
@@ -67,7 +67,7 @@ const SignIn = () => {
                 <form onSubmit={handleLogin} className="w-60  ml-10 lg:w-72">
                     <div>
                         <h2 className="text-2xl font-semibold">Welcome Back ..!</h2>
-                        <p className="text-gray-400 ">Login to continue</p>
+                        <p className="text-gray-400 ">SignIn to continue</p>
 
                     </div>
 
@@ -98,6 +98,7 @@ const SignIn = () => {
                                 placeholder="Password"
                                 required
                                 value={password}
+                                checked={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             {showPassword ? (
@@ -110,7 +111,7 @@ const SignIn = () => {
                     </div>
 
                     <div className="flex space-x-3 justify-between mt-4">
-                        <button type="submit" className="px-5 py-2 bg-[#4c2393] rounded-full text-white" >Log in</button>
+                        <button type="submit" className="px-5 py-2 bg-[#4c2393] rounded-full text-white" >Sign in</button>
                         <p className="lg:mt-2 text-gray-300">Forget Password</p>
                     </div>
 
@@ -119,7 +120,7 @@ const SignIn = () => {
                     <div className='gird grid-cols-1  '>
 
                         <div className="text-center">
-                            <h2 className="mb-3 font-medium">Log in With</h2>
+                            <h2 className="my-3 font-medium">Or SignIn With</h2>
 
                         </div>
 
