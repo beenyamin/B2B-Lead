@@ -1,28 +1,19 @@
-<div>
-const handleLogin = async (e) => {
-        e.preventDefault();
-        const toastId = toast.loading('Logging in ...');
 
-        try {
-            await login(email, password);
-            toast.success('Logged in', { id: toastId });
-            navigate(location?.state ? location?.state : '/');
 
-        } catch (error) {
-            toast.error(error.message, { id: toastId });
-        }
-
-    }
-
-    const handleGoogleLogin = async () => {
-        const toastId = toast.loading('Logging in ...');
-
-        try {
-            await googleLogin(email, password);
-            toast.success('Logged in', { id: toastId });
-            navigate(location?.state ? location?.state : '/');
-        } catch (error) {
-            toast.error(error.message, { id: toastId });
-        }
-    }; 
-</div>
+    
+    fetch('http://localhost:5000/newMessage', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(addNewMassage)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if (data.insertedId) {  
+                toast.success('Massage Send')
+                navigate(location?.state ? location?.state : '/')
+               
+            }
+        })

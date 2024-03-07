@@ -1,12 +1,15 @@
 
-import { FaHome } from "react-icons/fa";
+import { FaAddressBook, FaHome } from "react-icons/fa";
 import { PiListFill } from "react-icons/pi";
-import { MdWorkHistory } from "react-icons/md";
+import { MdWorkHistory,MdLogout } from "react-icons/md";
 import { FaSquarePhone } from "react-icons/fa6";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { BsList } from "react-icons/bs";
+import { BiSolidDashboard } from "react-icons/bi";
+import { IoLogOut } from "react-icons/io5";
+
 
 const Navbar = () => {
 
@@ -64,9 +67,12 @@ const Navbar = () => {
                                           <label tabIndex={0} className="flex cursor-pointer   ">
                                                 <BsList className=" text-[#4c2393] mt-1 ml-2" size={20} />
                                                
-                                               {
+                                               {/* {
                                                 user?.email ?  <img src={user.photoURL} className="inline-block h-7  ring-1 ring-[#4c2393] w-7 ml-2 rounded-full" alt="" /> :  <img src='https://www.svgrepo.com/show/338049/profile-user-avatar-person-people-man-account.svg' className="inline-block h-7  ring-1 ring-black w-7 ml-2 rounded-full" alt="" />
-                                               }
+                                               } */}
+
+                                                <img src='https://www.svgrepo.com/show/338049/profile-user-avatar-person-people-man-account.svg' className="inline-block h-7  ring-1 ring-[#4c2393] w-7 ml-2 rounded-full" alt="" />
+                                            
                                                
 
                                           </label>
@@ -103,23 +109,37 @@ const Navbar = () => {
                               <div className="p-4 w-52 min-h-full bg-base-200 text-base-content">
                                     {/* Sidebar content here */}
 
-                                    <div className="ml-10 space-y-2">
+                                    <div className=" border border-b-2 mt-5 border-b-[#4c2393] p-3 rounded space-y-2 ">
 
 
                                           <NavLink to="/" className={({ isActive, isPending }) =>
-                                                isPending ? "pending " : isActive ? " flex font-medium text-[#4c2393]  px-2 border-b-[#4c2393] border-b-2 " : "font-medium flex hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2 "}>  <FaHome size={15} className="mt-1 mr-2" /> Home
+                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex hover:text-rose-400  rounded px-2 "}>  <FaHome size={15} className="mt-1 mr-2" /> Home
                                           </NavLink>
                                           <NavLink to="/Contact" className={({ isActive, isPending }) =>
-                                                isPending ? "pending " : isActive ? " flex font-medium text-[#4c2393]  px-2 border-b-[#4c2393] border-b-2 " : "font-medium flex hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 px-2 "}>  <FaSquarePhone size={15} className="mt-1 mr-2" /> Contact
+                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex  px-2 "}>  <FaSquarePhone size={15} className="mt-1 mr-2" /> Contact
                                           </NavLink>
                                           <NavLink to="/service" className={({ isActive, isPending }) =>
-                                                isPending ? "pending " : isActive ? " flex font-medium text-[#4c2393]  px-2 border-b-[#4c2393] border-b-2 " : "font-medium flex hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400  px-2 "}>  <MdWorkHistory size={15} className="mt-1 mr-2" /> Service
+                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2 " : "font-medium flex hover:border-b-2   px-2 "}>  <MdWorkHistory size={15} className="mt-1 mr-2" /> Service
                                           </NavLink>
                                         
                                           <NavLink to="/blogs" className={({ isActive, isPending }) =>
-                                                isPending ? "pending " : isActive ? " flex font-medium text-[#4c2393]  px-2 border-b-[#4c2393] border-b-2 " : "font-medium flex hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2 "}>  <FaHome size={15} className="mt-1 mr-2" /> Blogs
+                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex   rounded px-2 "}>  <FaHome size={15} className="mt-1 mr-2" /> Blogs
                                           </NavLink>
 
+
+                                    </div>
+
+                                    <div className=" mt-5 p-3 space-y-2">
+                                    <NavLink to="/profile" className={({ isActive, isPending }) =>
+                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400 px-2 " : "font-medium flex hover:border-b-2   px-2 "}>  <FaAddressBook size={15} className="mt-1 mr-2" /> Profile
+                                          </NavLink>
+                                         
+                                          <NavLink to="/dashboard" className={({ isActive, isPending }) =>
+                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex   rounded px-2 "}>  <BiSolidDashboard size={15} className="mt-1 mr-2" />Dashboard
+                                          </NavLink>
+                                          <NavLink onClick={handelLogout} to="/sigIn" className={({ isActive, isPending }) =>
+                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex  rounded px-2 "}>  <IoLogOut size={18} className="mt-1 mr-2" />Logout
+                                          </NavLink>
 
                                     </div>
 

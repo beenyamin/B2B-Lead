@@ -4,9 +4,39 @@ import { RiHomeOfficeFill } from "react-icons/ri";
 import { FaSquarePhone } from "react-icons/fa6";
 import { PiCheckFatBold } from "react-icons/pi";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import axiosSecure from "../../Api/auth";
 
 
 const Contact = () => {
+      const {user} = useAuth ();
+      const navigate = useNavigate ();
+      const location = useLocation ();
+
+      const handleAddMassage = e => {
+            e.preventDefault();
+            const form = e.target;
+            const name = form.name.value;
+            const company = form.company.value;
+            const number = form.number.value;
+            const interest = form.interest.value;
+            const addNewMassage = { name: name,  company: company, number:number, interest:interest, email: user?.email }
+            axiosSecure.post('/newMessage', 
+            JSON.stringify(addNewMassage), 
+            { headers:
+                   { 'Content-Type': 'application/json' } })
+            .then(({ data }) => {
+                if (data.insertedId) {
+                    toast.success('Message Send');
+                    navigate(location?.state || '/');
+                }
+            })
+            .catch(error => console.error('Error sending message:', error));
+    
+        }
+
       return (
             <div className="pt-12 px-8 mb-20 ">
                   <Helmet>
@@ -20,17 +50,19 @@ const Contact = () => {
 
                               </div>
 
+                              <form onSubmit={handleAddMassage}>
                               <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:ml-5">
+
 
                                     <div className="space-y-3">
                                           <label className="input input-ghost flex items-center gap-2 border-[#4c2393]">
                                                 <IoPerson />
-                                                <input type="text" className="" placeholder="Your Name" />
+                                                <input type="text" name="name" className="" placeholder="Your Name" />
                                           </label>
 
                                           <label className="input input-ghost flex items-center gap-2 border-[#4c2393]">
                                                 <  IoMdMailUnread />
-                                                <input type="text" className="grow" placeholder="Your Email" />
+                                                <input type="text" name="email" className="grow" placeholder="Your Email" />
                                           </label>
 
                                     </div>
@@ -38,12 +70,12 @@ const Contact = () => {
                                     <div className="space-y-3">
                                           <label className="input input-ghost flex items-center gap-2 border-[#4c2393]">
                                                 < RiHomeOfficeFill />
-                                                <input type="text" className="grow" placeholder="Your Company Name" />
+                                                <input type="text" name="company" className="grow" placeholder="Your Company Name" />
                                           </label>
 
                                           <label className="input input-ghost flex items-center gap-2 border-[#4c2393] focus:border-[#4c2393]">
                                                 < FaSquarePhone />
-                                                <input type="text" className="grow focus:outline-none" placeholder="Your Phone Number" />
+                                                <input type="number" name="number" className="grow focus:outline-none" placeholder="Your Phone Number" />
                                           </label>
 
                                     </div>
@@ -51,7 +83,7 @@ const Contact = () => {
                               </div>
 
                               <div className="mt-5 lg:ml-5 ">
-                                    <select className="select border-[#4c2393] w-full ">
+                                    <select name="interest" className="select border-[#4c2393] w-full ">
                                           <option disabled selected>I am interested in..</option>
                                           <option>Contact List  Building</option>
                                           <option>Find Email Address</option>
@@ -61,12 +93,10 @@ const Contact = () => {
                               </div>
 
                               <div className="text-center mt-5">
-                                    <button className="px-6 py-2 rounded-md text-white font-medium uppercase bg-[#4c2393]">Submit Now</button>
+                                    <button type="submit" className="px-6 py-2 rounded-md  text-white font-medium uppercase bg-[#4c2393]">Submit Now</button>
                               </div>
 
-
-
-
+                              </form>
                         </div>
 
                         <div className="card-body">
