@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import axiosSecure from "../../../Api/auth";
 import { BiSolidMessageDots } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
+import Swal from "sweetalert2";
+import useGetMessages from "../../../Hooks/useGetMessages";
 
 const AllMessages = () => {
-
+      const [message, refetch] = useGetMessages()
       const [AllMessages, setAllMessages] = useState([])
 
       useEffect(() => {
@@ -12,6 +14,39 @@ const AllMessages = () => {
                   .then(response => setAllMessages(response.data))
                   .catch(error => console.error('Error fetching data:', error));
       }, [])
+
+
+      const handleDelete = id => {
+            Swal.fire({
+                  title: "Are you sure?",
+                  text: "You won't be able to revert this!",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                  if (result.isConfirmed) {
+
+                        axiosSecure.delete(`/AllMessage/${id}`)
+                              .then(res => {
+                                    if (res.data.deletedCount > 0) {
+                                          refetch();
+                                          Swal.fire({
+                                                title: "Deleted!",
+                                                text: "Your file has been deleted.",
+                                                icon: "success"
+
+                                          });
+                                    }
+
+                              })
+
+                  }
+            });
+
+      }
+
       return (
             <div>
                   <div className="mt-10 py-2 text-center">
@@ -29,7 +64,10 @@ const AllMessages = () => {
                                           <BiSolidMessageDots className="text-[#4c2393] mt-2 mr-3" />
 
                                           {/* Button */}
-                                          Message From {message.name} <button className="btn btn-sm rounded-full"><MdDeleteForever size={20} className="text-pink-600" /></button>
+                                          Message From {message.name}
+                                          <div>
+
+                                          </div>
                                     </div>
                                     <div className="collapse-content">
                                           <div className="overflow-hidden mt-4 flex  lg:flex-row flex-col gap-2 ">
@@ -60,6 +98,13 @@ const AllMessages = () => {
                                                 <div className="text-black font-medium py-2 bg-slate-200 w-full rounded-md ">
                                                       <span className="font-semibold"> Messages : </span>{message.text}
                                                 </div>
+
+                                                <div >
+                                                      <button onClick={() => handleDelete(message._id)} className=" bg-pink-500 rounded-md py-2 px-4">  <MdDeleteForever size={25} className="text-white" />
+                                                      </button>
+
+                                                </div>
+
                                           </div>
 
                                     </div>

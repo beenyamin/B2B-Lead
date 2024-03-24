@@ -11,13 +11,12 @@ import { VscSignOut } from "react-icons/vsc";
 import { BsFillPersonVcardFill } from "react-icons/bs";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
-import useAdmin from "../../Hooks/useAdmin";
 
 
 const Dashboard = () => {
-  const { user, logOut } = useAuth()
+  const {  logOut } = useAuth()
   const navigate = useNavigate()
-  const [isAdmin] = useAdmin()
+
 
   const handelSignOut = () => {
     logOut()

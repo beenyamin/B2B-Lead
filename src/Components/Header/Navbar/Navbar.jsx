@@ -26,18 +26,31 @@ const Navbar = () => {
                   });
       }
 
+      const handleClick = (event) => {
+            event.preventDefault();
+            const solutionSection = document.getElementById('solution');
+            solutionSection.scrollIntoView({ behavior: 'smooth' });
+          };
+
+
+
+
       const navLink = <>
 
             <ul className="space-x-6">
                   <NavLink to="/" className={({ isActive, isPending }) =>
                         isPending ? "pending " : isActive ? "font-medium text-[#4c2393] rounded px-2 border-b-[#4c2393] border-b-2 " : "font-medium hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2 "}>Home
                   </NavLink>
+                  
+                  <a  href="#solution" onClick={handleClick}  
+                        className="font-medium hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2">Service
+                  </a>
+
                   <NavLink to="/contact" className={({ isActive, isPending }) =>
                         isPending ? "pending " : isActive ? "font-medium text-[#4c2393] rounded px-2 border-b-[#4c2393] border-b-2 " : "font-medium hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2 "}>Contact
                         Us </NavLink>
-                  <NavLink to="/service" className={({ isActive, isPending }) =>
-                        isPending ? "pending " : isActive ? "font-medium text-[#4c2393] rounded px-2 border-b-[#4c2393] border-b-2 " : "font-medium hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2 "}>Service
-                  </NavLink>
+
+
                   <NavLink to="/blogs" className={({ isActive, isPending }) =>
                         isPending ? "pending " : isActive ? "font-medium text-[#4c2393] rounded px-2 border-b-[#4c2393] border-b-2 " : "font-medium hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2 "}>Blogs
                   </NavLink>
@@ -64,7 +77,6 @@ const Navbar = () => {
                                     {navLink}
                               </div>
 
-
                               <div className="navbar-end">
                                     {user?.email === 'admin@mail.com' ? (
                                           // Render admin features
@@ -75,16 +87,9 @@ const Navbar = () => {
                                                       <img src={user.photoURL || 'https://www.svgrepo.com/show/338049/profile-user-avatar-person-people-man-account.svg'} className="inline-block h-7 ring-1 ring-[#4c2393] w-7 ml-2 rounded-full" alt="" />
                                                 </label>
                                                 <ul tabIndex={0} className="mt-6 z-[1] p-4 shadow menu menu-sm dropdown-content bg-slate-100 opacity-35 rounded-box w-60 text-xl font-medium">
-                                                      <li>
-                                                            <Link to='/profile'>Profile</Link>
-                                                      </li>
-
-                                                      <li>
-                                                            <Link to='/dashboard'>Admin Dashboard</Link>
-                                                      </li>
-                                                      <li>
-                                                            <Link onClick={handelLogout}>Log Out</Link>
-                                                      </li>
+                                                      <li> <Link to='/profile'>Profile</Link>  </li>
+                                                      <li> <Link to='/dashboard'>Admin Dashboard</Link> </li>
+                                                      <li>  <Link onClick={handelLogout}>Log Out</Link> </li>
                                                 </ul>
                                           </div>
                                     ) : (

@@ -22,7 +22,7 @@ const Solution = () => {
                         <div className="">
                               <button onClick={() => setAccordionOpen(!accordionOpen)} className="flex justify-between py-3 px-4 lg:mr-2 text-base lg:text-xl bg-[#4c2393] font-semibold text-white " >
                                     <span className="">Hand Curated Custom Contact List Building</span>
-                                    <div className="mt-4 px-3 ">
+                                    <div className="mt-1 px-3 ">
                                           {accordionOpen ? <TiMinus /> : <TiPlus />}
                                     </div>
                               </button>

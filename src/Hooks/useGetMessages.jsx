@@ -1,17 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "./useAuth";
 import axiosSecure from "../Api/auth";
 
 
 const useGetMessages = () => {
-      const axios = axiosSecure()
-      const {data: getAllMessages = [] , isPending: loading , refetch} = useQuery ({
-            queryKey: ['getMessages'],
+        //tan stack Query
+        const {user} = useAuth ();
+
+        const  { refetch, data: message = [] } = useQuery ({       
+            queryKey: ['message' , user?.email],
             queryFn: async () => {
-                  const res = await axios.get('/AllMessage')
-                  return res.data ;
+                const res = await axiosSecure.get(`/AllMessage?email=${user.email}`)
+                return res.data;
+
             }
-      })
-      return [getAllMessages , loading , refetch]
+            
+        })
+
+        return [message, refetch]
 };
 
 export default useGetMessages;

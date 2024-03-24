@@ -18,10 +18,13 @@ const Home = () => {
                   <Banner />
                   <HappyClient />
                   <Target />
-                  <Solution />
+                  <div id="solution"> {/* Add an id to the section */}
+                        <Solution />
+                  </div>
+
                   <HireUs />
                   <Reviews />
-                  <Test/>
+                  <Test />
 
 
             </div>
