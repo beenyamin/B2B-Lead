@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import axiosSecure from "../../Api/auth";
+import Swal from "sweetalert2";
 
 
 const Contact = () => {
@@ -22,14 +23,21 @@ const Contact = () => {
             const company = form.company.value;
             const number = form.number.value;
             const interest = form.interest.value;
-            const addNewMassage = { name: name,  company: company, number:number, interest:interest, email: user?.email }
+            const text =form.text.value
+            const addNewMassage = { name: name,  company: company, number:number, interest:interest, text:text , email: user?.email }
+           console.log(addNewMassage);
             axiosSecure.post('/newMessage', 
             JSON.stringify(addNewMassage), 
             { headers:
                    { 'Content-Type': 'application/json' } })
             .then(({ data }) => {
                 if (data.insertedId) {
-                    toast.success('Message Send');
+                  Swal.fire({
+                        title: "Message Send!",
+                        text: "Please Wait For Response!",
+                        icon: "success"
+                      });
+                  
                     navigate(location?.state || '/');
                 }
             })
@@ -38,11 +46,11 @@ const Contact = () => {
         }
 
       return (
-            <div className="pt-12 px-8 mb-20 ">
+            <div className="pt-20 px-8 ">
                   <Helmet>
                         <title> Lead Forge | Contact </title>
                   </Helmet>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 w-full mt-10">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 w-full my-20  max-w-[1280px] mx-auto ">
                         <div className="card ">
                               <div className="card-body">
                                     <h2 className="card-title text-3xl font-bold text-[#54595F]">Let us do all the work for you</h2>
@@ -83,23 +91,26 @@ const Contact = () => {
                               </div>
 
                               <div className="mt-5 lg:ml-5 ">
-                                    <select name="interest" className="select border-[#4c2393] w-full ">
-                                          <option disabled selected>I am interested in..</option>
+                                    <select name="interest" defaultValue="I am interested in.." className="select border-[#4c2393] w-full ">
+                                          <option >I am interested in..</option>
                                           <option>Contact List  Building</option>
                                           <option>Find Email Address</option>
                                           <option>Data Appending & Enrichment</option>
                                           <option>Hired Dedicated Research Team</option>
                                     </select>
                               </div>
+                              <div className="mt-5 lg:ml-5 ">
+                              <textarea name="text" className="textarea border-[#4c2393] w-full" placeholder="Type Your Messages"></textarea>
+                              </div>
 
                               <div className="text-center mt-5">
-                                    <button type="submit" className="px-6 py-2 rounded-md  text-white font-medium uppercase bg-[#4c2393]">Submit Now</button>
+                                    <button type="submit" className="px-6 py-2 rounded-md text-white font-medium uppercase bg-[#4c2393]">Submit Now</button>
                               </div>
 
                               </form>
                         </div>
 
-                        <div className="card-body">
+                        <div className="card-body mt-24">
                               <div className="flex text-[#636363] mt-2 ml-2 ">
                                     <PiCheckFatBold size={25} className="mr-2" />
                                     <p className="text-xl font-semibold">Manually researched and hand picked</p>

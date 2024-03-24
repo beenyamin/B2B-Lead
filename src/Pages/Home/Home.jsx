@@ -6,6 +6,7 @@ import HireUs from "../../Components/HireUs/HireUs";
 import Reviews from "../../Components/Reviews/Reviews";
 import Solution from "../../Components/Solution/Solution";
 import Target from "../../Components/Target/Target";
+import Test from "../../Components/Test/Test";
 
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
                   <Solution />
                   <HireUs />
                   <Reviews />
+                  <Test/>
 
 
             </div>

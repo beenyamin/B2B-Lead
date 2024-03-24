@@ -3,8 +3,11 @@ import { FaRegCheckSquare } from "react-icons/fa";
 
 const HireUs = () => {
       return (
+
         <div className="bg-slate-200 py-10">
-        <div className="text-center text-black">
+
+            <div className="max-w-[1280px] mx-auto">
+            <div className="text-center text-black">
             <h2 className="lg:text-4xl text-2xl font-bold mb-3 pt-8">Why Hire Us</h2>
             <p className="text-[#747474] text-lg">8 Reasons that make us Premium and Friendly</p>
         </div>
@@ -65,6 +68,8 @@ const HireUs = () => {
                 </div>
             </div>
         </div>
+            </div>
+      
     
        
     

@@ -1,7 +1,7 @@
 
 import { FaAddressBook, FaHome } from "react-icons/fa";
 import { PiListFill } from "react-icons/pi";
-import { MdWorkHistory,MdLogout } from "react-icons/md";
+import { MdWorkHistory } from "react-icons/md";
 import { FaSquarePhone } from "react-icons/fa6";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { BsList } from "react-icons/bs";
 import { BiSolidDashboard } from "react-icons/bi";
 import { IoLogOut } from "react-icons/io5";
+import Info from "../Info/Info";
 
 
 const Navbar = () => {
@@ -33,7 +34,7 @@ const Navbar = () => {
                   </NavLink>
                   <NavLink to="/contact" className={({ isActive, isPending }) =>
                         isPending ? "pending " : isActive ? "font-medium text-[#4c2393] rounded px-2 border-b-[#4c2393] border-b-2 " : "font-medium hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2 "}>Contact
-                  </NavLink>
+                        Us </NavLink>
                   <NavLink to="/service" className={({ isActive, isPending }) =>
                         isPending ? "pending " : isActive ? "font-medium text-[#4c2393] rounded px-2 border-b-[#4c2393] border-b-2 " : "font-medium hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2 "}>Service
                   </NavLink>
@@ -51,43 +52,65 @@ const Navbar = () => {
       return (
             <div>
 
+                  <Info />
                   {/* pc */}
+                  <div className="navbar  bg-slate-100 py-2 fixed bg-opacity-90 z-10 hidden lg:flex md:flex mt-8 ">
 
-                  <div className="navbar px-8 bg-slate-100 py-2 fixed bg-opacity-90 z-10 hidden lg:flex md:flex">
-                        <div className="navbar-start">
-                              <a className="btn btn-ghost text-xl font-MochiyPopOne"> Lead Forge</a>
-                        </div>
-                        <div className="navbar-center ">
-                              {navLink}
-                        </div>
-                        <div className="navbar-end ">
-                              {user?.email ?
+                        <div className="max-w-[1280px] mx-auto space-x-80">
+                              <div className="flex font-MochiyPopOne text-xl">
+                                    <h2>Lead</h2> <h2>Forge</h2>
+                              </div>
+                              <div className="navbar-center ">
+                                    {navLink}
+                              </div>
 
-                                    <div className="dropdown dropdown-end border border-[#4c2393] rounded-full ">
-                                          <label tabIndex={0} className="flex cursor-pointer   ">
+
+                              <div className="navbar-end">
+                                    {user?.email === 'admin@mail.com' ? (
+                                          // Render admin features
+                                          <div className="dropdown dropdown-end border border-[#4c2393] rounded-full">
+                                                <label tabIndex={0} className="flex cursor-pointer">
                                                 <BsList className=" text-[#4c2393] mt-1 ml-2" size={20} />
-                                               
-                                               {/* {
-                                                user?.email ?  <img src={user.photoURL} className="inline-block h-7  ring-1 ring-[#4c2393] w-7 ml-2 rounded-full" alt="" /> :  <img src='https://www.svgrepo.com/show/338049/profile-user-avatar-person-people-man-account.svg' className="inline-block h-7  ring-1 ring-black w-7 ml-2 rounded-full" alt="" />
-                                               } */}
+                                                      {/* Your admin interface elements here */}
+                                                      <img src={user.photoURL || 'https://www.svgrepo.com/show/338049/profile-user-avatar-person-people-man-account.svg'} className="inline-block h-7 ring-1 ring-[#4c2393] w-7 ml-2 rounded-full" alt="" />
+                                                </label>
+                                                <ul tabIndex={0} className="mt-6 z-[1] p-4 shadow menu menu-sm dropdown-content bg-slate-100 opacity-35 rounded-box w-60 text-xl font-medium">
+                                                      <li>
+                                                            <Link to='/profile'>Profile</Link>
+                                                      </li>
 
-                                                <img src='https://www.svgrepo.com/show/338049/profile-user-avatar-person-people-man-account.svg' className="inline-block h-7  ring-1 ring-[#4c2393] w-7 ml-2 rounded-full" alt="" />
-                                            
-                                               
+                                                      <li>
+                                                            <Link to='/dashboard'>Admin Dashboard</Link>
+                                                      </li>
+                                                      <li>
+                                                            <Link onClick={handelLogout}>Log Out</Link>
+                                                      </li>
+                                                </ul>
+                                          </div>
+                                    ) : (
+                                          // Render regular user features
+                                          user ? (
+                                                <div className="dropdown dropdown-end border border-[#4c2393] rounded-full">
+                                                      <label tabIndex={0} className="flex cursor-pointer">
+                                                      <BsList className=" text-[#4c2393] mt-1 ml-2" size={20} />
+                                                            <img src={user.photoURL || 'https://www.svgrepo.com/show/338049/profile-user-avatar-person-people-man-account.svg'} className="inline-block h-7 ring-1 ring-[#4c2393] w-7 ml-2 rounded-full" alt="" />
+                                                      </label>
+                                                      <ul tabIndex={0} className="mt-6 z-[1] p-4 shadow menu menu-sm dropdown-content bg-slate-100 opacity-35 rounded-box w-60 text-xl font-medium">
+                                                            <li>
+                                                                  <Link to='/profile'>Profile</Link>
+                                                            </li>
+                                                            <li>
+                                                                  <Link onClick={handelLogout}>Log Out</Link>
+                                                            </li>
+                                                      </ul>
+                                                </div>
+                                          ) : (
+                                                <Link to='/signIn' className="bg-[#4c2393] py-2 rounded-md px-5 hover:bg-lime-500 text-white text-md font-medium">Sign in</Link>
+                                          )
+                                    )}
+                              </div>
 
-                                          </label>
-                                          <ul tabIndex={0} className="mt-6 z-[1] p-4 shadow menu menu-sm dropdown-content bg-slate-100 opacity-35 rounded-box w-60 text-xl font-medium">
-                                                <li>
-                                                <Link to='/profile'>Profile</Link> 
-                                                </li>
-                                                <li> <Link to='/dashboard'>Dashboard</Link></li>
-                                                <li><Link onClick={handelLogout}>Log Out</Link></li>
-                                          </ul>
-                                    </div>
 
-                                    : <Link to='/signIn' className="bg-[#4c2393] py-2 rounded-md px-5 hover:bg-lime-500 text-white text-md font-medium">Sign in</Link>
-
-                              }
                         </div>
                   </div>
 
@@ -121,7 +144,7 @@ const Navbar = () => {
                                           <NavLink to="/service" className={({ isActive, isPending }) =>
                                                 isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2 " : "font-medium flex hover:border-b-2   px-2 "}>  <MdWorkHistory size={15} className="mt-1 mr-2" /> Service
                                           </NavLink>
-                                        
+
                                           <NavLink to="/blogs" className={({ isActive, isPending }) =>
                                                 isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex   rounded px-2 "}>  <FaHome size={15} className="mt-1 mr-2" /> Blogs
                                           </NavLink>
@@ -130,10 +153,10 @@ const Navbar = () => {
                                     </div>
 
                                     <div className=" mt-5 p-3 space-y-2">
-                                    <NavLink to="/profile" className={({ isActive, isPending }) =>
+                                          <NavLink to="/profile" className={({ isActive, isPending }) =>
                                                 isPending ? "pending " : isActive ? " flex font-medium text-rose-400 px-2 " : "font-medium flex hover:border-b-2   px-2 "}>  <FaAddressBook size={15} className="mt-1 mr-2" /> Profile
                                           </NavLink>
-                                         
+
                                           <NavLink to="/dashboard" className={({ isActive, isPending }) =>
                                                 isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex   rounded px-2 "}>  <BiSolidDashboard size={15} className="mt-1 mr-2" />Dashboard
                                           </NavLink>

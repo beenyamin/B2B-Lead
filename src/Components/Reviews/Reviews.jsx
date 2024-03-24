@@ -6,7 +6,6 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-
 const Reviews = () => {
 
       const [reviews, setReviews] = useState([]);
@@ -18,16 +17,11 @@ const Reviews = () => {
                         setReviews(data)
                   })
 
-
-
       }, [])
 
-
-
-
       return (
-            <div>
-                  <div className="text-center text-black">
+            <div className="max-w-[1280px] mx-auto">
+                  <div className="text-center text-black ">
                         <h2 className="lg:text-4xl text-2xl font-bold mb-3 pt-8">Over 300 companies use LeadForge</h2>
                         <p className="text-[#747474] text-lg">Our 98% of clients leave 5/5 star reviews with their high satisfaction <br />
                               Other 2% made it at least 4 stars</p>
@@ -37,7 +31,8 @@ const Reviews = () => {
                         <Swiper
                               spaceBetween={30}
                               pagination={{
-                              clickable: true, }}
+                                    clickable: true,
+                              }}
                               modules={[Pagination]} className="mySwiper"  >
 
                               {reviews.map(review =>

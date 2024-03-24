@@ -4,12 +4,14 @@ import { Link,  useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AiFillGoogleCircle, AiFillLinkedin } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
-import signUpImage from "../../../public/images/Sign up-bro.png";
 import { IoMdMailUnread } from "react-icons/io";
 import { RiEyeFill, RiEyeOffFill, RiLockPasswordFill } from "react-icons/ri";
 import { IoPerson } from "react-icons/io5";
 import { Helmet } from "react-helmet-async";
-import { getToken, saveUser } from "../../Api/utils";
+import { getToken, saveUser } from "../../Api/utils"; 
+import SignUpAnimation from "../../../public/SignUP.json";
+import Lottie from "react-lottie";
+
 
 const SignUp = () => {
       const { createUser, signInWithGoogle,} = useAuth();
@@ -70,32 +72,43 @@ const SignUp = () => {
           }
       }
   
+      const defaultOptions = {
+            loop: true,
+            autoplay: true,
+            animationData: SignUpAnimation,
+            rendererSettings: {
+                preserveAspectRatio: 'xMidYMid slice'
+            }
+        };
 
       return (
-            <div className="mb-20 px-0 lg:px-24 pt-20 " >
+            <div className="mb-20 px-0 lg:px-32 pt-20 " >
                   <Helmet>
                         <title> Lead Forge | Sign Up </title>
                   </Helmet>
-                  <div className=" mt-10 flex justify-between">
-                        <div></div>
-                        <div className="mr-20">
-                              <h2 className="text-gray-400"> Already An User? <span className="text-lg text-[#4c2393]  font-semibold "> <Link to={'/signIn'}>SignIn</Link> </span></h2>
-                        </div>
+                  <div className=" my-10 text-center">
+                  
+                              <h2 className="text-gray-400 text-xl font-medium"> Already An User? <span className="text-xl font-medium text-[#4c2393]   "> <Link to={'/signIn'}>SignIn</Link> </span></h2> 
                   </div>
 
 
+                  <div className='mt-0 lg:mt-6 grid lg:grid-cols-2 grid-cols-1 lg:px-64'>
 
-                  <div className=' mt-0 lg:mt-6 grid lg:grid-cols-2 grid-cols-1 lg:px-10'>
-                        <div>
-                              <img src={signUpImage} className="w-96 h-96" alt="" />
-                        </div>
+
+                  <div className="lg:mt-10 lg:ml-24 ">
+                <Lottie options={defaultOptions}
+                    height={400}
+                    width={400} />
+                </div>
+
+                       
 
                         {/* Form Start */}
 
-                        <form onSubmit={handleSignUp} className="w-60  ml-10 lg:w-72">
+                        <form onSubmit={handleSignUp} className="w-60 lg:w-72 mx-auto">
 
                               <div>
-                                    <h2 className="text-2xl font-bold">SignUp Here..!</h2>
+                                    <h2 className="text-2xl font-bold text-center mt-10">SignUp Here..!</h2>
                               </div>
 
                               <div>

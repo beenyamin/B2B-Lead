@@ -11,7 +11,7 @@ const Accordion = () => {
                         <div className="">
                               <button onClick={() => setAccordion(!Accordion)}  className="flex justify-between py-3 lg:px-8  lg:text-xl bg-[#4c2393] font-semibold text-white " >
                                     <span className="lg:ml-3 ml-3">Hire Dedicated Research Team</span>
-                                    <div className="justify-end mt-2 px-24 lg:mt-1 pr-4 ">
+                                    <div className="justify-end mt-4 px-24 lg:mt-1 pr-4 ">
                                           {Accordion ? <TiMinus className="" /> : <TiPlus className="" />}
                                     </div>
                               </button>

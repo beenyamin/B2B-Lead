@@ -5,14 +5,15 @@ import { AiFillGoogleCircle } from 'react-icons/ai';
 import toast from "react-hot-toast";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import signInImage from "../../../public/images/Sign in-pana.png";
 import { RiEyeFill, RiEyeOffFill, RiLockPasswordFill } from "react-icons/ri";
 import { IoMdMailUnread } from "react-icons/io";
 import { Helmet } from "react-helmet-async";
 import { getToken, saveUser } from "../../Api/utils";
+import Lottie from "react-lottie";
+import signInAnimation from "../../../public/signin.json";
 
 const SignIn = () => {
-    const { signIn,signInWithGoogle } = useAuth();
+    const { signIn, signInWithGoogle } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -23,27 +24,27 @@ const SignIn = () => {
     };
 
     const from = location?.state?.from?.pathname || '/'
-  
-   
+
+
     const handleSignIn = async event => {
-      event.preventDefault()
-      const form = event.target
-      const email = form.email.value
-      const password = form.password.value
-  
-      try {
-     
-        const result = await signIn(email, password)
-        await getToken(result?.user?.email)
-        navigate(from, { replace: true })
-        toast.success('Login Successful')
-      } catch (err) {
-        console.log(err)
-        toast.error(err?.message)
-      }
+        event.preventDefault()
+        const form = event.target
+        const email = form.email.value
+        const password = form.password.value
+
+        try {
+
+            const result = await signIn(email, password)
+            await getToken(result?.user?.email)
+            navigate(from, { replace: true })
+            toast.success('Login Successful')
+        } catch (err) {
+            console.log(err)
+            toast.error(err?.message)
+        }
     }
-  
-  
+
+
     const handleGoogleSignIn = async () => {
         try {
             const GoogleRegistration = await signInWithGoogle()
@@ -53,34 +54,48 @@ const SignIn = () => {
             await getToken(GoogleRegistration?.user?.email)
             navigate('/')
             toast.success(' SuccessFully Log in With Google')
-        
+
         } catch (error) {
             toast.error(error?.message);
         }
     }
-  
+
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: signInAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+
+
     return (
-        <div className="mb-20 px-0 lg:px-24 pt-20">
-             <Helmet>
+        <div className="mb-20 px-0 lg:px-32 pt-20 ">
+
+            <Helmet>
                 <title> Lead Forge | Sign in </title>
             </Helmet>
 
-
-            <div className=" mt-10 flex justify-evenly lg:justify-end">
+            <div className=" my-10 flex justify-around ">
                 <div className="">
-                    <h2 className="text-gray-400"> New Here? <span className="text- md text-[#4c2393] font-semibold "> <Link to={'/signUp'}>SignUp</Link> </span></h2>
+                    <h2 className="text-gray-400 text-xl font-medium"> New Here? <span className="text-xl font-medium text-[#4c2393] font-semibold "> <Link to={'/signUp'}>SignUp</Link> </span></h2>
                 </div>
             </div>
 
-            <div className=' mt-0 lg:mt-6 grid lg:grid-cols-2 grid-cols-1 lg:px-10'>
-                <div>
-                    <img src={signInImage} className="w-96 h-96" alt="" />
+            <div className=' mt-0 lg:mt-6 grid lg:grid-cols-2 grid-cols-1 lg:px-64'>
+
+                <div className="lg:mt-5 lg:ml-24">
+                <Lottie options={defaultOptions}
+                    height={400}
+                    width={400} />
                 </div>
+                
 
                 {/* Form Start */}
 
-                <form onSubmit={handleSignIn} className="w-60  ml-10 lg:w-72">
-                    <div>
+                <form onSubmit={handleSignIn} className="w-60 mx-auto mt-10 lg:w-72">
+                    <div className="text-center">
                         <h2 className="text-2xl font-semibold">Welcome Back ..!</h2>
                         <p className="text-gray-400 ">SignIn to continue</p>
 
@@ -98,7 +113,7 @@ const SignIn = () => {
                                 placeholder="Your email"
                                 required
                                 name="email"
-                                 />
+                            />
                         </label>
                     </div>
 
@@ -139,7 +154,7 @@ const SignIn = () => {
                         </div>
 
                         <div className=" ml-4 lg:ml-10">
-                            <Link> <button onClick={ () => handleGoogleSignIn ()} className=' btn btn-outline text-[#4c2393] hover:bg-[#4c2393]'>
+                            <Link> <button onClick={() => handleGoogleSignIn()} className=' btn btn-outline text-[#4c2393] hover:bg-[#4c2393]'>
                                 <AiFillGoogleCircle className='w-8 h-6'></AiFillGoogleCircle></button></Link>
                             <Link> <button className='btn btn-outline text-[#4c2393] hover:bg-[#4c2393]'>
                                 <BsFacebook className='w-8 h-6'></BsFacebook></button></Link>
