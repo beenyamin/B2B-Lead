@@ -1,5 +1,7 @@
 import { BiSolidPhoneCall } from "react-icons/bi";
-import { IoMdMailUnread, IoLogoWhatsapp } from "react-icons/io";
+import { IoMdMailUnread } from "react-icons/io";
+import { FaWhatsappSquare } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 const Footer = () => {
@@ -26,18 +28,18 @@ const Footer = () => {
                         <nav>
                               <h6 className="footer-title">Important Link</h6>
                               <a className="link link-hover">About us</a>
-                              <a className="link link-hover">Contact</a>
-                              <a className="link link-hover">Jobs</a>
+                              <Link to='\contact' className="link link-hover">Contact Us</Link>
+                              <a className="link link-hover">Blogs</a>
                               <a className="link link-hover">Press kit</a>
                         </nav>
                         <nav>
                               <h6 className="footer-title ml-1">Contact Us </h6>
 
                               <div className=" flex"> <BiSolidPhoneCall className="mt-1 text-lg" />
-                                    <h1 className="ml-1 mt-1">+99999999999</h1>
+                                    <h1 className="ml-1 mt-1">+8801540355315</h1>
                               </div>
-                              <div className=" flex"> <IoLogoWhatsapp className="mt-1 text-lg" />
-                                    <h1 className="ml-1 mt-1">+8801704040404</h1>
+                              <div className=" flex"> <FaWhatsappSquare className="mt-1 text-lg" />
+                                    <h1 className="ml-1 mt-1">+8801540355315</h1>
                               </div>
 
                               <div className=" flex"> <IoMdMailUnread className="mt-1 text-lg" />

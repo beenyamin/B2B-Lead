@@ -48,7 +48,7 @@ const Solution = () => {
                         </div>
 
                         <div>
-                             <Link to="/contact"> <button className="bg-[#ed1588] text-xl py-3 px-16 w-full font-semibold text-white">30¢ Per Contact</button> </Link>
+                             <Link to="/contact"> <button className="bg-[#ed1588] text-xl py-3 px-16 w-full font-semibold text-white">40¢ Per Contact</button> </Link>
                         </div>
                         <div>
                              <Link to="/contact"> <button className="bg-[#2d9322] text-xl py-3 w-full px-10 font-semibold text-white uppercase ">Order now</button></Link>

@@ -30,7 +30,7 @@ const Navbar = () => {
             event.preventDefault();
             const solutionSection = document.getElementById('solution');
             solutionSection.scrollIntoView({ behavior: 'smooth' });
-          };
+      };
 
 
 
@@ -41,8 +41,8 @@ const Navbar = () => {
                   <NavLink to="/" className={({ isActive, isPending }) =>
                         isPending ? "pending " : isActive ? "font-medium text-[#4c2393] rounded px-2 border-b-[#4c2393] border-b-2 " : "font-medium hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2 "}>Home
                   </NavLink>
-                  
-                  <a  href="#solution" onClick={handleClick}  
+
+                  <a href="#solution" onClick={handleClick}
                         className="font-medium hover:border-b-2 hover:text-rose-400 hover:border-b-rose-400 rounded px-2">Service
                   </a>
 
@@ -79,25 +79,24 @@ const Navbar = () => {
 
                               <div className="navbar-end">
                                     {user?.email === 'admin@mail.com' ? (
-                                          // Render admin features
+
                                           <div className="dropdown dropdown-end border border-[#4c2393] rounded-full">
                                                 <label tabIndex={0} className="flex cursor-pointer">
-                                                <BsList className=" text-[#4c2393] mt-1 ml-2" size={20} />
-                                                      {/* Your admin interface elements here */}
+                                                      <BsList className=" text-[#4c2393] mt-1 ml-2" size={20} />
                                                       <img src={user.photoURL || 'https://www.svgrepo.com/show/338049/profile-user-avatar-person-people-man-account.svg'} className="inline-block h-7 ring-1 ring-[#4c2393] w-7 ml-2 rounded-full" alt="" />
                                                 </label>
-                                                <ul tabIndex={0} className="mt-6 z-[1] p-4 shadow menu menu-sm dropdown-content bg-slate-100 opacity-35 rounded-box w-60 text-xl font-medium">
+                                                <ul tabIndex={0} className="mt-6 z-[1] p-6  menu menu-sm dropdown-content bg-slate-100 opacity-80 rounded-box w-72 text-xl font-medium">
                                                       <li> <Link to='/profile'>Profile</Link>  </li>
-                                                      <li> <Link to='/dashboard'>Admin Dashboard</Link> </li>
+                                                      <li> <Link to='/dashboard/adminHome'>Admin Dashboard   <span className="indicator-item badge ">new</span> </Link> </li>
                                                       <li>  <Link onClick={handelLogout}>Log Out</Link> </li>
                                                 </ul>
                                           </div>
                                     ) : (
-                                          // Render regular user features
+
                                           user ? (
                                                 <div className="dropdown dropdown-end border border-[#4c2393] rounded-full">
                                                       <label tabIndex={0} className="flex cursor-pointer">
-                                                      <BsList className=" text-[#4c2393] mt-1 ml-2" size={20} />
+                                                            <BsList className=" text-[#4c2393] mt-1 ml-2" size={20} />
                                                             <img src={user.photoURL || 'https://www.svgrepo.com/show/338049/profile-user-avatar-person-people-man-account.svg'} className="inline-block h-7 ring-1 ring-[#4c2393] w-7 ml-2 rounded-full" alt="" />
                                                       </label>
                                                       <ul tabIndex={0} className="mt-6 z-[1] p-4 shadow menu menu-sm dropdown-content bg-slate-100 opacity-35 rounded-box w-60 text-xl font-medium">
@@ -105,7 +104,7 @@ const Navbar = () => {
                                                                   <Link to='/profile'>Profile</Link>
                                                             </li>
                                                             <li>
-                                                                  <Link onClick={handelLogout}>Log Out</Link>
+                                                                  <Link onClick={handelLogout}>Sign Out</Link>
                                                             </li>
                                                       </ul>
                                                 </div>
@@ -143,11 +142,13 @@ const Navbar = () => {
                                           <NavLink to="/" className={({ isActive, isPending }) =>
                                                 isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex hover:text-rose-400  rounded px-2 "}>  <FaHome size={15} className="mt-1 mr-2" /> Home
                                           </NavLink>
+
+                                          <a href="#solution" onClick={handleClick}
+                                                className="flex font-medium text-rose-400 px-2">  <MdWorkHistory size={15} className="mt-1 mr-2" /> Service
+                                          </a>
+
                                           <NavLink to="/Contact" className={({ isActive, isPending }) =>
                                                 isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex  px-2 "}>  <FaSquarePhone size={15} className="mt-1 mr-2" /> Contact
-                                          </NavLink>
-                                          <NavLink to="/service" className={({ isActive, isPending }) =>
-                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2 " : "font-medium flex hover:border-b-2   px-2 "}>  <MdWorkHistory size={15} className="mt-1 mr-2" /> Service
                                           </NavLink>
 
                                           <NavLink to="/blogs" className={({ isActive, isPending }) =>
@@ -158,18 +159,39 @@ const Navbar = () => {
                                     </div>
 
                                     <div className=" mt-5 p-3 space-y-2">
-                                          <NavLink to="/profile" className={({ isActive, isPending }) =>
+
+                                          {user?.email ? <>    <NavLink to="/profile" className={({ isActive, isPending }) =>
                                                 isPending ? "pending " : isActive ? " flex font-medium text-rose-400 px-2 " : "font-medium flex hover:border-b-2   px-2 "}>  <FaAddressBook size={15} className="mt-1 mr-2" /> Profile
                                           </NavLink>
+                                          </> : <></>}
 
-                                          <NavLink to="/dashboard" className={({ isActive, isPending }) =>
+
+
+                                          {user?.email === 'admin@mail.com' ? <><NavLink to="/dashboard" className={({ isActive, isPending }) =>
                                                 isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex   rounded px-2 "}>  <BiSolidDashboard size={15} className="mt-1 mr-2" />Dashboard
+                                          </NavLink></> : <></>}
+
+
+                                          {user?.email ? <>  <NavLink onClick={handelLogout} to="/sigIn" className={({ isActive, isPending }) =>
+                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex  rounded px-2 "}>  <IoLogOut size={18} className="mt-1 mr-2" />Sign out
                                           </NavLink>
-                                          <NavLink onClick={handelLogout} to="/sigIn" className={({ isActive, isPending }) =>
-                                                isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex  rounded px-2 "}>  <IoLogOut size={18} className="mt-1 mr-2" />Logout
-                                          </NavLink>
+                                          </> : <>
+                                                <Link to='/signIn' className="bg-[#4c2393] py-2 rounded-md px-5 hover:bg-lime-500 text-white text-md font-medium">Sign in</Link>
+                                          </>}
+
+
+
+
 
                                     </div>
+
+                                    <div>
+
+
+
+
+                                    </div>
+
 
                               </div>
                         </div>

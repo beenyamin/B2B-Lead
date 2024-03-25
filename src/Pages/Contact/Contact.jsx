@@ -46,7 +46,7 @@ const Contact = () => {
         }
 
       return (
-            <div className="pt-20 px-8 ">
+            <div className="lg:pt-20 pt-10 px-8 ">
                   <Helmet>
                         <title> Lead Forge | Contact </title>
                   </Helmet>

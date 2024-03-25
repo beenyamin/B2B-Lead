@@ -12,6 +12,7 @@ import DashBoard from "../Layouts/DashBoard/DashBoard";
 import Admin from "../Pages/Dashboard/Admin/Admin";
 import AllMessages from "../Pages/Dashboard/AllMessages/AllMessages";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import Profile from "../Pages/Profile/Profile";
 
 export const router = createBrowserRouter([
       {
@@ -27,7 +28,8 @@ export const router = createBrowserRouter([
                   { path: "/service", element: <Service /> },
                   { path: "/blogs", element: <Blogs /> },
                   { path: "/signIn", element: <SignIn /> },
-                  { path: "/signUp", element: <SignUp /> },]
+                  { path: "/signUp", element: <SignUp /> }, 
+                  { path: "/profile", element: <Profile /> }, ]
       },
 
       {

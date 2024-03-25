@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { fadeIn } from "../Varient";
+import { motion } from "framer-motion";
 const Reviews = () => {
 
       const [reviews, setReviews] = useState([]);
@@ -37,12 +36,20 @@ const Reviews = () => {
 
                               {reviews.map(review =>
                                     <SwiperSlide className="" key={review._id} >
-                                          <div className=" flex flex-col items-center mx-20 my-24 ">
+                                          <motion.div variants={fadeIn("up", 0.20)}
+                                                initial="hidden"
+                                                whileInView={"show"}
+                                                viewport={{ once: false, amount: 0.9 }}
+
+                                                className=" flex flex-col items-center mx-20 my-24 ">
                                                 <h2 className="text-2xl text-orange-300 "> {review.name}</h2>
                                                 <p className="">{review.details}</p>
                                                 <p className="">{review.rating}</p>
                                                 <p className="">{review.review}</p>
-                                          </div>
+                                          </motion.div>
+
+
+
                                     </SwiperSlide>)}
 
                         </Swiper>

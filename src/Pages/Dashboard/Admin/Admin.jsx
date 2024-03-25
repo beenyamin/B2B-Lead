@@ -3,11 +3,12 @@ import { BiMessageDots } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axiosSecure from "../../../Api/auth";
+import { Helmet } from "react-helmet-async";
 
 const Admin = () => {
       const [AllMessages, setAllMessages] = useState([])
       const [AllUsers, setAllUsers] = useState([])
-console.log(AllUsers);
+      console.log(AllUsers);
       useEffect(() => {
             axiosSecure.get('/AllMessage', { withCredentials: true })
                   .then(response => setAllMessages(response.data))
@@ -24,12 +25,17 @@ console.log(AllUsers);
 
       return (
             <div>
+
+                  <Helmet>
+                        <title> Dashboard | AdminHome </title>
+                  </Helmet>
+
                   {/* Your content goes here */}
 
                   <div className="flex my-10 justify-center items-center gap-5">
-                     
+
                         <IoFlowerOutline size={30} className="text-secondary" />
-                     
+
                         <div className="text-3xl font-bold ">Welcome to the Dashboard </div>
                         <IoFlowerOutline size={30} className="text-secondary" />
                   </div>
@@ -39,7 +45,7 @@ console.log(AllUsers);
                         <div className="stats shadow w-80 text-[#4c2393]">
                               <div className="stat">
                                     <div className="stat-figure ">
-                                         <BiMessageDots size={40}/> 
+                                          <BiMessageDots size={40} />
                                     </div>
                                     <div className="stat-title">Total Messages</div>
                                     <div className="stat-value ">{AllMessages.length}+</div>
@@ -49,7 +55,7 @@ console.log(AllUsers);
                         <div className="stats shadow w-80 ">
                               <div className="stat">
                                     <div className="stat-figure text-secondary">
-                                          <FaUsers size={40}/>
+                                          <FaUsers size={40} />
                                     </div>
                                     <div className="stat-title">Total Users</div>
                                     <div className="stat-value text-secondary"> {AllUsers.length}+</div>

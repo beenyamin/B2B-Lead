@@ -4,19 +4,24 @@ import { BiSolidMessageDots } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import useGetMessages from "../../../Hooks/useGetMessages";
+import { Helmet } from "react-helmet-async";
 
 const AllMessages = () => {
-      const [message, refetch] = useGetMessages()
-      const [AllMessages, setAllMessages] = useState([])
+      const [message, refetch] = useGetMessages();
+      const [AllMessages, setAllMessages] = useState([]);
+      const [messages, setMessages] = useState([]);
 
       useEffect(() => {
             axiosSecure.get('/AllMessage', { withCredentials: true })
-                  .then(response => setAllMessages(response.data))
+                  .then(response => {
+                        setAllMessages(response.data);
+                        setMessages(response.data); 
+                  })
                   .catch(error => console.error('Error fetching data:', error));
-      }, [])
-
+      }, []);
 
       const handleDelete = id => {
+           
             Swal.fire({
                   title: "Are you sure?",
                   text: "You won't be able to revert this!",
@@ -25,10 +30,10 @@ const AllMessages = () => {
                   confirmButtonColor: "#3085d6",
                   cancelButtonColor: "#d33",
                   confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
+            }).then(result => {
                   if (result.isConfirmed) {
-
-                        axiosSecure.delete(`/AllMessage/${id}`)
+                        axiosSecure
+                              .delete(`/AllMessage/${id}`)
                               .then(res => {
                                     if (res.data.deletedCount > 0) {
                                           refetch();
@@ -36,19 +41,25 @@ const AllMessages = () => {
                                                 title: "Deleted!",
                                                 text: "Your file has been deleted.",
                                                 icon: "success"
-
                                           });
                                     }
-
+                                    setMessages(messages.filter(msg => msg._id !== id));
                               })
-
+                              .catch(error => {
+                                    console.error("Error deleting message:", error);
+                              });
+                  } else {
+                        refetch();
                   }
             });
+      };
 
-      }
 
       return (
             <div>
+                  <Helmet>
+                        <title> Dashboard | Messages </title>
+                  </Helmet>
                   <div className="mt-10 py-2 text-center">
                         <div className="indicator">
                               <span className="indicator-item badge badge-secondary ">{AllMessages.length}+</span>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosSecure from "../../../Api/auth";
 import { MdDeleteForever } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 
 
 const AllUsers = () => {
@@ -15,6 +16,9 @@ const AllUsers = () => {
 
       return (
             <div>
+                  <Helmet>
+                        <title> Dashboard | Users </title>
+                  </Helmet>
 
                   <div className="mt-10 py-2 text-center">
                         <div className="indicator">

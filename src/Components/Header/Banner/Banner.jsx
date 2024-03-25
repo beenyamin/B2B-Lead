@@ -27,8 +27,8 @@ const Banner = () => {
                     <p className="lg:text-5xl text-2xl lg:font-semibold font-bold text-white">Find Your Highly Targeted Verified <br /> <span className=''>Lead For Only 40¢</span></p>
                     <p className=" lg:py-5 lg:text-xl text-sm text-white mt-4">Using your search criteria, we Will find and build highly targeted lists in 48 hrs. <br/> fill your pipeline with high-quality  human-verified leads at an affordable <br /> way.!</p>
     
-                    <h1 className='text-white text-sm mb-1 mt-8'>300+ Five Star Client Reviews</h1>
-                    <Link to='/contact'> <button className="py-3 px-12 shadow-2xl shadow-black font-medium text-md border-0 rounded-xl hover:bg-lime-500 bg-[#4c2393] text-white">GET STARTED</button></Link>
+                    <h1 className='text-white text-lg mb-1 mt-8'>300+ Five Star Client Reviews</h1>
+                    <Link to='/contact'> <button className="py-3 px-8 shadow-2xl shadow-white  font-medium text-2xl border-0 rounded-xl hover:bg-lime-500 bg-[#4c2393] text-white uppercase">GET STARTED</button></Link>
     
                 </div>
             </div>
