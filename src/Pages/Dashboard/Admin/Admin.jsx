@@ -32,15 +32,13 @@ const Admin = () => {
 
                   {/* Your content goes here */}
 
-                  <div className="flex my-10 justify-center items-center gap-5">
-
+                  <div className="flex my-10 justify-center items-center lg:gap-5 w-full mx-auto ">
                         <IoFlowerOutline size={30} className="text-secondary" />
-
-                        <div className="text-3xl font-bold ">Welcome to the Dashboard </div>
+                        <div className="lg:text-3xl text-lg  font-bold ">Welcome to the Dashboard </div>
                         <IoFlowerOutline size={30} className="text-secondary" />
                   </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-3 lg:px-52 ">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 lg:px-52 gap-5 ">
 
                         <div className="stats shadow w-80 text-[#4c2393]">
                               <div className="stat">

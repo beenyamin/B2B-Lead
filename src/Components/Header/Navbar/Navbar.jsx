@@ -167,7 +167,7 @@ const Navbar = () => {
 
 
 
-                                          {user?.email === 'admin@mail.com' ? <><NavLink to="/dashboard" className={({ isActive, isPending }) =>
+                                          {user?.email === 'admin@mail.com' ? <><NavLink to="/dashboard/adminHome" className={({ isActive, isPending }) =>
                                                 isPending ? "pending " : isActive ? " flex font-medium text-rose-400  px-2  " : "font-medium flex   rounded px-2 "}>  <BiSolidDashboard size={15} className="mt-1 mr-2" />Dashboard
                                           </NavLink></> : <></>}
 
